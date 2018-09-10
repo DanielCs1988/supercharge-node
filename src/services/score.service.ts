@@ -18,7 +18,7 @@ export class ScoreService {
             ! currentGame ||
             !this.gameService.isNumber(score.steps) ||
             !this.gameService.isNumber(score.seconds) ||
-            currentGame.pictures.length > score.steps
+            currentGame.pictures.length / 2 > score.steps
         ) {
             throw new Error('Invalid score!');
         }

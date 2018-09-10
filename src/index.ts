@@ -6,8 +6,11 @@ import "./controllers/game.controller";
 import "./controllers/score.controller";
 import {GameService} from "./services/game.service";
 import {ScoreService} from "./services/score.service";
+import {connect} from "mongodb";
 
 const port = process.env.PORT || 8080;
+
+connect(process.env.MONGODB_URI!, { useNewUrlParser: true });
 
 const container = new Container();
 container.bind<GameService>('GameService').to(GameService).inSingletonScope();

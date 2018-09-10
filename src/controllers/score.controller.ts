@@ -2,7 +2,6 @@ import {controller, httpGet, httpPost, interfaces, requestBody} from "inversify-
 import {ScoreService} from "../services/score.service";
 import {inject} from "inversify";
 import {ScoreRequestModel} from "../models/score-request.model";
-import {ScoreResponseModel} from "../models/score-response.model";
 
 @controller('/score')
 export class ScoreController implements interfaces.Controller {
@@ -15,7 +14,7 @@ export class ScoreController implements interfaces.Controller {
     }
 
     @httpPost('/')
-    private submitScore(@requestBody() score: ScoreRequestModel): ScoreResponseModel {
+    private submitScore(@requestBody() score: ScoreRequestModel) {
         return this.scoreService.saveScore(score);
     }
 }

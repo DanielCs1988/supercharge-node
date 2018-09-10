@@ -17,12 +17,14 @@
     "inversify-express-utils": "^6.1.0",
     "mongoose": "^5.2.13",
     "reflect-metadata": "^0.1.12",
-    "typescript": "^3.0.3"
+    "typescript": "^3.0.3",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
     "@types/jasmine": "^2.8.8",
     "@types/mongoose": "^5.2.11",
+    "@types/uuid": "^3.4.4",
     "jasmine": "^3.2.0"
   }
 }

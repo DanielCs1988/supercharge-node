@@ -1,3 +1,3 @@
 export interface ScoreResponseModel {
-    position: number;
+    position: string;
 }

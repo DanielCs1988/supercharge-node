@@ -1,24 +1,20 @@
 import { injectable } from "inversify";
-import {ScoreModel} from "../models/score.model";
+import { Score } from "../models/score.model";
 import {ScoreRequestModel} from "../models/score-request.model";
-import {ScoreResponseModel} from "../models/score-response.model";
 
 @injectable()
 export class ScoreService {
 
-    getHighScores = (): ScoreModel[] => {
-        return [
-            {
-                "steps": 0,
-                "seconds": 0,
-                "name": "string"
-            }
-        ];
+    getHighScores = () => {
+        return Score.find({});
     };
 
-    saveScore = (score: ScoreRequestModel): ScoreResponseModel => {
+    saveScore = async (score: ScoreRequestModel) => {
+        const newScore = new Score(score);
+        console.log(newScore);
+        const { _id } = await newScore.save();
         return {
-            "position": 0
+            position: _id
         };
     };
 }

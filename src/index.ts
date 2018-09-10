@@ -6,7 +6,9 @@ import "./controllers/game.controller";
 import "./controllers/score.controller";
 import {GameService} from "./services/game.service";
 import {ScoreService} from "./services/score.service";
-import {connect} from "mongodb";
+import {SocketServer} from "./socket/socket-server";
+import {MultiplayerController} from "./controllers/multiplayer.controller";
+import {connect} from "mongoose";
 
 const port = process.env.PORT || 8080;
 
@@ -22,5 +24,9 @@ server.setConfig(app => {
 });
 
 const app = server.build();
+
+const multiplayerController = new MultiplayerController(container.get('GameService'));
+const socketServer = new SocketServer(app, [ multiplayerController ]);
+socketServer.init();
 
 app.listen(port, () => console.log(`Server is running on port ${port}...`));

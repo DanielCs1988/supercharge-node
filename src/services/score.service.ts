@@ -22,6 +22,7 @@ export class ScoreService {
         ) {
             throw new Error('Invalid score!');
         }
+        this.gameService.closeGame(score.token);
         const newScore = new Score(score);
         const { _id } = await newScore.save();
         return {

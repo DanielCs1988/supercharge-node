@@ -23,6 +23,10 @@ export class GameService {
         return game;
     };
 
+    readonly closeGame = (token: string) => {
+        this.currentGames = this.currentGames.filter(game => game.token !== token);
+    };
+
     readonly getCurrentGames = () => {
         return [...this.currentGames];
     };

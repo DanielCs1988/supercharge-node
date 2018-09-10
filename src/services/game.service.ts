@@ -9,17 +9,25 @@ const CARD_NUMBER_UPPER_LIMIT = ALL_CARDS.length;
 @injectable()
 export class GameService {
 
+    private currentGames: GameModel[] = [];
+
     readonly getNewGame = (size: number): GameModel => {
         if (!this.isNumber(size) || size < CARD_NUMBER_LOWER_LIMIT || size > CARD_NUMBER_UPPER_LIMIT) {
             throw new Error('Invalid stack size!');
         }
-        return {
+        const game = {
             token: uuid(),
             pictures: this.generateCards(size)
         };
+        this.currentGames.push(game);
+        return game;
     };
 
-    private readonly isNumber = (num: any) => {
+    readonly getCurrentGames = () => {
+        return [...this.currentGames];
+    };
+
+    readonly isNumber = (num: any) => {
         return !isNaN(+num) && isFinite(num);
     };
 

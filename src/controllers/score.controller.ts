@@ -1,7 +1,8 @@
-import {controller, httpGet, httpPost, interfaces, requestBody} from "inversify-express-utils";
+import {controller, httpGet, httpPost, interfaces, requestBody, response} from "inversify-express-utils";
 import {ScoreService} from "../services/score.service";
 import {inject} from "inversify";
 import {ScoreRequestModel} from "../models/score-request.model";
+import {Response} from "express";
 
 @controller('/score')
 export class ScoreController implements interfaces.Controller {
@@ -14,7 +15,12 @@ export class ScoreController implements interfaces.Controller {
     }
 
     @httpPost('/')
-    private submitScore(@requestBody() score: ScoreRequestModel) {
-        return this.scoreService.saveScore(score);
+    private async submitScore(@requestBody() score: ScoreRequestModel, @response() res: Response) {
+        try {
+            return await this.scoreService.saveScore(score);
+        } catch (error) {
+            res.status(400);
+            return error.message;
+        }
     }
 }
